@@ -43,15 +43,15 @@ if(~isempty(sub_idx))
     fprintf('<strong> Warning: The following subjects have no survival voxel after thresholding, \nand so will be excluded in the following analysis:\n</strong>')
     for(ni=1:length(sub_idx))
         fprintf('<strong>%s </strong>\n', variables.SubjectID{sub_idx(ni)})
-        variables.lesion_dat(ni,:) = [];
-        variables.one_score(ni) = [];
-        variables.lesion_vol(ni) = [];
         variables.excluded_SubjectID{ni} = variables.SubjectID{sub_idx(ni)};
-        variables.SubjectID(sub_idx(ni)) = [];
-        
     end
-    fprintf('\n')
+    fprintf('\n') 
 end
+
+variables.lesion_dat(sub_idx,:) = [];
+variables.one_score(sub_idx) = [];
+variables.lesion_vol(sub_idx) = [];
+variables.SubjectID(sub_idx) = [];
 %% Read atlas images
 vo = spm_vol(parameters.atlas_aal);
 variables.atlas_aal_map = uint8(spm_read_vols(vo));
